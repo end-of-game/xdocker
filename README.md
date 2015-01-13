@@ -4,7 +4,7 @@ Nicolas MULLER, 2015
 
 Extended CLI for docker because typing long docker commands is boring...
 
-Project built with Cobra, a commander for modern Go CLI interactions [https://github.com/spf13/cobra] and Docker Go API.
+Project built with Cobra, a commander for modern Go CLI interactions [https://github.com/spf13/cobra].
 
 ## SETUP
 
@@ -25,8 +25,8 @@ and test on a test system before using in a production environment.
 
 ## Command quick reference
 
-* **killall** - Kill all named containers. Provide a prefix for the image name.
-  The committed image will be in the form ``<namespace>/<container name>``.
+* **kill [all|rex]** - Kill all containers or these named and provided by regular expression.
+  The option ``all`` required an confirmation else you must force it.
 * **dcalldated** - Like the above command but adds a date stamp as the tag.
   The committed image will be in the form ``<namespace>/<container name>:01-Septmber-2014``.
 
