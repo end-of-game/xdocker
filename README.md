@@ -3,6 +3,7 @@
 Nicolas MULLER, 2015
 
 Extended CLI for docker because typing long docker commands is boring...
+Project built with Cobra, a commander for modern Go CLI interactions [https://github.com/spf13/cobra] and Docker Go API.
 
 ## SETUP
 
