@@ -1,45 +1,18 @@
 package main
 
-import(
-	"github.com/spf13/cobra"
-	"github.com/samalba/dockerclient"
+import (
 	"fmt"
+	"github.com/samalba/dockerclient"
+	"github.com/spf13/cobra"
 	"log"
 	"regexp"
+	"treeptik.fr/ascii"
 )
 
-func displayMainLogo() {
-	fmt.Println("                                            ___________|\\")
-	fmt.Println("                                        _  -| Treeptik |:")
-	fmt.Println("                                       <____|.---------||")
-	fmt.Println("                                                   .---''---,")
-	fmt.Println("                                                    ;..__..'    _...");
-	fmt.Println("                                                  ,'/  ;|/..--''    \\");
-	fmt.Println("                                                ,'_/.-/':            :");
-	fmt.Println("                                           _..-'''/  /  |  \\    \\   _|/|")
-	fmt.Println("                                          \\      /-./_ \\;   \\    \\,;'   \\")
-    fmt.Println("                                           ,\\   / \\:  `:\\    \\   //    `:`.")
-	fmt.Println("                                         ,'  \\ /-._;    | :   : ::    ,.   .")
-	fmt.Println("                                       ,'     ::  /`-._| |    | || ' :  `.`.)")
-	fmt.Println("                                    _,'       |;._::|  | |    | `|   :")
-	fmt.Println("                                 ,'   `.     /   |`-:_ ; |    |  |  : \\")
-	fmt.Println("                                 `--.   )   /|-._:    :          |   \\ \\");
-	fmt.Println("                                    /  /   :_|   ;`-._;   __..--';    : :")
-	fmt.Println("                                   /  (    ;|;-./_  _/.-:'o |   /     ' |")
-	fmt.Println("                                  /  , \\._/_/_./--''/_|:|___|_,'        |")
-	fmt.Println("                                 :  /   `'-'--'----'---------'          |")
-	fmt.Println("                                 | :     O ._O   O_. O ._O   O_.      ; ;")
-	fmt.Println("                                 : `.      //    //    //    //     ,' /")
-	fmt.Println("                               ~~~`.______//____//____//____//_______,'~")
-	fmt.Println("                                         //    //~   //    //           ")
- 	fmt.Println("                                  ~~   _//   _//   _// ~ _//     ~")
-	fmt.Println("                                ~     / /   / /   / /   / /  ~      ~~")
-	fmt.Println("                                     ~~~   ~~~   ~~~   ~~~")
-
-}
-
 func main() {
-	displayMainLogo()
+
+	ascii.DisplayMainLogo()
+
 	var Force bool
 	docker, _ := dockerclient.NewDockerClient("tcp://192.168.50.4:4243", nil)
 	var versionCmd = &cobra.Command{
@@ -64,11 +37,11 @@ func main() {
 			}
 			if len(containers) == 0 {
 				fmt.Println("***********************")
-				fmt.Println("*** Nothing to hunt ***");
+				fmt.Println("*** Nothing to hunt ***")
 				fmt.Println("***********************")
-				return;
+				return
 			}
-			fmt.Println("");
+			fmt.Println("")
 			var counter int
 			for _, c := range containers {
 				err = docker.KillContainer(c.Id, "")
@@ -79,9 +52,9 @@ func main() {
 					counter++
 				}
 			}
-			fmt.Println("");
-			fmt.Println(counter, "containers are shooted");
-			fmt.Println("");
+			fmt.Println("")
+			fmt.Println(counter, "containers are shooted")
+			fmt.Println("")
 		},
 	}
 
@@ -97,11 +70,11 @@ func main() {
 			}
 			if len(containers) == 0 {
 				fmt.Println("***********************")
-				fmt.Println("*** Nothing to hunt ***");
+				fmt.Println("*** Nothing to hunt ***")
 				fmt.Println("***********************")
-				return;
+				return
 			}
-			fmt.Println("");
+			fmt.Println("")
 
 			var counter int
 			r, _ := regexp.Compile(args[0])
@@ -116,24 +89,24 @@ func main() {
 					}
 				}
 			}
-			if counter==0 {
+			if counter == 0 {
 				fmt.Println("***********************************************")
-				fmt.Println("*** Nothing to hunt for pattern : ", args[0]);
+				fmt.Println("*** Nothing to hunt for pattern : ", args[0])
 				fmt.Println("***********************************************")
-				return;
+				return
 			} else {
 
 			}
-			fmt.Println("");
-			fmt.Println(counter, "containers are shooted");
-			fmt.Println("");
+			fmt.Println("")
+			fmt.Println(counter, "containers are shooted")
+			fmt.Println("")
 		},
 	}
 
 	var cmdKill = &cobra.Command{
 		Use:   "kill [all|rex]",
 		Short: "Kill containers",
-		Long:  `Kill container.
+		Long: `Kill container.
         The command accepts 'all' and 'rex' as subcommand.
         `,
 		Run: func(cmd *cobra.Command, args []string) {
@@ -142,27 +115,27 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Println("");
+			fmt.Println("")
 			if len(containers) == 0 {
 				fmt.Println("***********************")
-				fmt.Println("*** Nothing to hunt ***");
+				fmt.Println("*** Nothing to hunt ***")
 				fmt.Println("***********************\n")
-				return;
+				return
 			}
 			for _, c := range containers {
 				fmt.Printf("[Simulation] kill %s\n", c.Names[0][1:])
 			}
 			fmt.Println("Command options are \n")
-			fmt.Println("\txdocker kill all");
-			fmt.Println("\txdocker kill rex [pattern]");
-			fmt.Println("");
+			fmt.Println("\txdocker kill all")
+			fmt.Println("\txdocker kill rex [pattern]")
+			fmt.Println("")
 		},
 	}
 
 	var rootCmd = &cobra.Command{Use: "xdocker"}
 	rootCmd.AddCommand(cmdKill, versionCmd)
-	cmdKill.AddCommand(allCmd);
-	cmdKill.AddCommand(regexpCmd);
+	cmdKill.AddCommand(allCmd)
+	cmdKill.AddCommand(regexpCmd)
 
 	rootCmd.PersistentFlags().BoolVarP(&Force, "force", "v", false, "force action")
 
