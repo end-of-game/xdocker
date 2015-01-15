@@ -28,9 +28,7 @@ and test on a test system before using in a production environment.
 
 ## INSTALL WITH DOCKER
 
-Why install xDocker with docker ?
-
-Because it’s fun ! Therefore, you won’t mind if my method to build nsenter uses Docker itself.
+Why install xDocker with docker ? Because it’s fun ! Therefore, you won’t mind if my method to build nsenter uses Docker itself.
 
 If you want to install `xdocker` into `/usr/local/bin`, just do this:
 
