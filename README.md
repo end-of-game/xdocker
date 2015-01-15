@@ -3,9 +3,12 @@
 Nicolas MULLER, 2015
 
 Extended CLI for docker because typing long docker commands is boring...
+Project built with
 
-Project built with Cobra, a commander for modern Go CLI interactions [https://github.com/spf13/cobra].
-
+* Cobra[https://github.com/spf13/cobra], a commander for modern Go CLI interactions .
+* Viper[https://github.com/spf13/viper], Go configuration with fangs, companion to cobra
+* DockerClient[Docker client library in Go], a Docker client library in Go
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ~~~   ~~~   ~~~   ~~~`)`>
 ## INSTALL FROM SOURCE
 
 You must know at least how to compile Go sources and have the golang runtime with you.
