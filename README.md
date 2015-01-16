@@ -56,4 +56,4 @@ Then do whatever you want with the binary in `/tmp/xdocker`.
 * **kill [all|rex]** - Kill all containers or these named and provided by regular expression.
   The option ``all`` required an confirmation else you must force it.
 
-**Note:** Nothing to say...
+**Note:** Nothing to say for the moment
