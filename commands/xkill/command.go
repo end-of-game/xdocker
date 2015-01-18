@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"regexp"
+	"strings"
 )
 
 // global variable for this package
@@ -45,6 +46,7 @@ func InitCommands(rootCmd *cobra.Command, pdocker *dockerclient.DockerClient) {
 }
 
 func Kill(cmd *cobra.Command, args []string) {
+
 	containers, err := docker.ListContainers(false, true, "")
 	if err != nil {
 		log.Fatal(err)
@@ -63,6 +65,7 @@ func Kill(cmd *cobra.Command, args []string) {
 	fmt.Println("\txdocker kill all")
 	fmt.Println("\txdocker kill rex [pattern]")
 	fmt.Println("")
+
 }
 
 func KillAll(cmd *cobra.Command, args []string) {
@@ -77,19 +80,33 @@ func KillAll(cmd *cobra.Command, args []string) {
 		return
 	}
 	fmt.Println("")
-	var counter int
+
 	for _, c := range containers {
-		err = docker.KillContainer(c.Id, "")
-		if err != nil {
-			log.Fatal(err)
-		} else {
-			fmt.Printf("[Shooting] %s \n", c.Names[0][1:])
-			counter++
-		}
+		fmt.Printf("[Selection] %s \n", c.Names[0][1:])
 	}
-	fmt.Println("")
-	fmt.Println(counter, "containers are shooted")
-	fmt.Println("")
+
+	fmt.Print("\n[Warning] Are you sure to kill them [Yes/No] : ")
+	var input string
+	fmt.Scanf("%s", &input)
+	// if the answer is yes, we can kill the container
+	if strings.EqualFold(input, "yes") || strings.EqualFold(input, "y") {
+		fmt.Println("")
+		var counter int
+		for _, c := range containers {
+			err = docker.KillContainer(c.Id, "")
+			if err != nil {
+				log.Fatal(err)
+			} else {
+				fmt.Printf("[Shooting] %s \n", c.Names[0][1:])
+				counter++
+			}
+		}
+		fmt.Println("")
+		fmt.Println(counter, "containers are shooted")
+		fmt.Println("")
+	} else {
+		fmt.Println("Thanks to take time to think about...")
+	}
 }
 
 func KillWithRegex(cmd *cobra.Command, args []string) {

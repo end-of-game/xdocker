@@ -5,7 +5,6 @@ import (
 	"github.com/samalba/dockerclient"
 	"github.com/spf13/cobra"
 	"os"
-	"treeptik.fr/ascii"
 	"treeptik.fr/commands/xkill"
 )
 
@@ -20,7 +19,6 @@ func main() {
 		Short: "Print the version number of xdocker",
 		Long:  `All software has versions. This is xdocker's`,
 		Run: func(cmd *cobra.Command, args []string) {
-			ascii.DisplayMainLogo()
 			fmt.Println("Extended docker client // Provided by Treeptik, the Cloud and Java Company")
 		},
 	}
