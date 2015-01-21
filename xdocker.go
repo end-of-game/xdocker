@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"os"
 	"treeptik.fr/commands/xkill"
+	"treeptik.fr/commands/xremove"
 )
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 
 	var rootCmd = &cobra.Command{Use: "xdocker"}
 	xkill.InitCommands(rootCmd, docker)
+	xremove.InitCommands(rootCmd, docker)
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.PersistentFlags().BoolVarP(&Force, "force", "v", false, "force action")
 

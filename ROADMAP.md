@@ -14,3 +14,7 @@ This is a simple roadmap to group ideas and features
 * Kill all containers corresponding to a tag
 * Stop all running containers... same option than Kill
 * Displaying all events with differents verbose mode
+* Delete all images (tag option)
+* Pull all images from a repo with a local tag
+* Indicate the container associated with a volume ID
+* Displays statistics on container start/destroy/creation/die... need a data backend

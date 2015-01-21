@@ -46,26 +46,10 @@ func InitCommands(rootCmd *cobra.Command, pdocker *dockerclient.DockerClient) {
 }
 
 func Kill(cmd *cobra.Command, args []string) {
-
-	containers, err := docker.ListContainers(false, true, "")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("")
-	if len(containers) == 0 {
-		fmt.Println("***********************")
-		fmt.Println("*** Nothing to hunt ***")
-		fmt.Println("***********************\n")
-		return
-	}
-	for _, c := range containers {
-		fmt.Printf("[Simulation] kill %s\n", c.Names[0][1:])
-	}
 	fmt.Println("Command options are \n")
 	fmt.Println("\txdocker kill all")
 	fmt.Println("\txdocker kill rex [pattern]")
 	fmt.Println("")
-
 }
 
 func KillAll(cmd *cobra.Command, args []string) {
@@ -105,7 +89,7 @@ func KillAll(cmd *cobra.Command, args []string) {
 		fmt.Println(counter, "containers are shooted")
 		fmt.Println("")
 	} else {
-		fmt.Println("Thanks to take time to think about...")
+		fmt.Println("\nThanks to take time to think about...")
 	}
 }
 
