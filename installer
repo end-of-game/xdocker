@@ -1,0 +1,12 @@
+#!/bin/sh
+if mountpoint -q /target; then
+    echo "Installing xdocker to /target"
+    cp /xdocker /target
+    echo "Installing docker-enter to /target"
+    cp /xdocker /target
+else
+    echo "/target is not a mountpoint."
+    echo "You can either:"
+    echo "- re-run this container with -v /usr/local/bin:/target"
+    echo "- extract the xdocker binary (located at /xdocker)"
+fi
